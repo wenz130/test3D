@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="styleSheet" href="css.css">
+</head>
+
+<body>
+    <model-viewer id="duck" camera-controls touch-action="pan-y"
+        src="https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf" ar
+        ar-modes="webxr scene-viewer quick-look" alt="A 3D model of a duck"
+        ios-src="https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf">
+        <div class="controls">
+            <p>AR로 상품확인하기</p>
+            <select id="option1"></select>
+            <select id="option2">
+                <option>Size</option>
+            </select>
+        </div>
+    </model-viewer>
+    <script type="module">
+        const modelViewerTexture = document.querySelector("model-viewer#duck");
+        const option1 = document.querySelector('#option1');
+        const option2 = document.querySelector("#option2");
+
+        let parentOption = [
+            { v: "", t: "Color" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf", t: "Blue" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1000.gltf", t: "Brown" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1000.gltf", t: "Grey" }
+        ];
+
+        let childOption1 = [
+            { v: "", t: "Size" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf", t: "1000" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1500.gltf", t: "1500" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1900.gltf", t: "1900" },
+        ];
+
+        let childOption2 = [
+            { v: "", t: "Size" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1000.gltf", t: "1000" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1500.gltf", t: "1500" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1900.gltf", t: "1900" },
+        ];
+
+        let childOption3 = [
+            { v: "", t: "Size" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1000.gltf", t: "1000" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1500.gltf", t: "1500" },
+            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1900.gltf", t: "1900" },
+        ];
+
+
+
+        function loadParentOption() {
+            let h = [];
+            parentOption.forEach(item => {
+                h.push('<option value=' + item.v + '>' + item.t + '</option>');
+            });
+
+            document.querySelector("#option1").innerHTML = h.join("");
+        }
+
+        function selectOption2() {
+            let parentOption = document.querySelector("#option1").value;
+            let h = [];
+            if (parentOption == "") {
+
+            } else {
+                if (parentOption == "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf") {
+                    childOption1.forEach(item => {
+                        h.push('<option value=' + item.v + '>' + item.t + '</option>');
+                    });
+                } else if (parentOption == "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1000.gltf") {
+                    childOption2.forEach(item => {
+                        h.push('<option value=' + item.v + '>' + item.t + '</option>');
+                    });
+                } else if (parentOption == "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1000.gltf") {
+                    childOption3.forEach(item => {
+                        h.push('<option value=' + item.v + '>' + item.t + '</option>');
+                    });
+                }
+            }
+
+            document.querySelector("#option2").innerHTML = h.join("");
+        }
+
+        function selectSize(event) {
+            const options = event.currentTarget.options;
+            const index = options.selectedIndex;
+            modelViewerTexture.src = options[index].value;
+            modelViewerTexture.iosSrc = options[index].value;
+        }
+
+        loadParentOption();
+        option1.addEventListener("change", selectOption2);
+        option2.addEventListener("change", selectSize);
+
+    </script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js">
+    </script>
+</body>
+
+</html>
