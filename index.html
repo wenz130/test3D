@@ -12,7 +12,7 @@
 <body>
     <model-viewer id="duck" camera-controls touch-action="pan-y"
         src="https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf" ar
-        alt="A 3D model of a duck" ar-scale = "fixed" xr - environment
+        alt="A 3D model of a duck" ar-scale="fixed" xr - environment
         ios-src="https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.usdz">
         <div class="controls">
             <p>AR로 상품확인하기</p>
@@ -26,6 +26,7 @@
         const modelViewerTexture = document.querySelector("model-viewer#duck");
         const option1 = document.querySelector('#option1');
         const option2 = document.querySelector("#option2");
+        let i = [];
 
         let parentOption = [
             { v: "", t: "Color" },
@@ -36,23 +37,59 @@
 
         let childOption1 = [
             { v: "", t: "Size" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf", t: "1000" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1500.gltf", t: "1500" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1900.gltf", t: "1900" },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.usdz",
+                t: "1000"
+            },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1500.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1500.usdz",
+                t: "1500"
+            },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1900.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1900.usdz",
+                t: "1900"
+            },
         ];
 
         let childOption2 = [
             { v: "", t: "Size" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1000.gltf", t: "1000" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1500.gltf", t: "1500" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1900.gltf", t: "1900" },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1000.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1000.usdz",
+                t: "1000"
+            },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1500.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1500.usdz",
+                t: "1500"
+            },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1900.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1900.usdz",
+                t: "1900"
+            },
         ];
 
         let childOption3 = [
             { v: "", t: "Size" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1000.gltf", t: "1000" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1500.gltf", t: "1500" },
-            { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1900.gltf", t: "1900" },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1000.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1000.usdz",
+                t: "1000"
+            },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1500.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1500.usdz",
+                t: "1500"
+            },
+            {
+                v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1900.gltf",
+                i: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1900.usdz",
+                t: "1900"
+            },
         ];
 
 
@@ -74,27 +111,29 @@
             } else {
                 if (parentOption == "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf") {
                     childOption1.forEach(item => {
-                        h.push('<option value=' + item.v + '>' + item.t + '</option>');
+                        h.push('<option value=' + item.v + ' id=' +item.i+'>' + item.t + '</option>');
                     });
                 } else if (parentOption == "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_brown_1000.gltf") {
                     childOption2.forEach(item => {
-                        h.push('<option value=' + item.v + '>' + item.t + '</option>');
+                        h.push('<option value=' + item.v + ' id=' +item.i+'>' + item.t + '</option>');
                     });
                 } else if (parentOption == "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1000.gltf") {
                     childOption3.forEach(item => {
-                        h.push('<option value=' + item.v + '>' + item.t + '</option>');
+                        h.push('<option value=' + item.v + ' id=' +item.i+'>' + item.t + '</option>');
                     });
                 }
             }
 
             document.querySelector("#option2").innerHTML = h.join("");
+
         }
 
         function selectSize(event) {
             const options = event.currentTarget.options;
             const index = options.selectedIndex;
+
             modelViewerTexture.src = options[index].value;
-            modelViewerTexture.iosSrc = options[index].value;
+            modelViewerTexture.iosSrc = options[index].id;
         }
 
         loadParentOption();
