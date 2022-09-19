@@ -28,6 +28,7 @@
         const option2 = document.querySelector("#option2");
         let i = [];
 
+        //최초 옵션 목록
         let parentOption = [
             { v: "", t: "Color" },
             { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_blue_1000.gltf", t: "Blue" },
@@ -35,6 +36,9 @@
             { v: "https://hellovr.s3.ap-northeast-2.amazonaws.com/Rugs_Minimal/Circle_grey_1000.gltf", t: "Grey" }
         ];
 
+        //최초 옵션 선택 후 두번째 옵션 목록
+        //v는 웹 페이지 상에 3d이미지, i는 iphone을 위한 usdz 파일
+        //v는 value 값으로 넣어주었고, i는 id 값으로 부여해서 각각 model-viewer 속성에 부여
         let childOption1 = [
             { v: "", t: "Size" },
             {
@@ -133,12 +137,20 @@
             const index = options.selectedIndex;
 
             modelViewerTexture.src = options[index].value;
+        }
+
+        function selectSize2(event) {
+            const options = event.currentTarget.options;
+            const index = options.selectedIndex;
+
+            modelViewerTexture.src = options[index].value;
             modelViewerTexture.iosSrc = options[index].id;
         }
 
         loadParentOption();
         option1.addEventListener("change", selectOption2);
-        option2.addEventListener("change", selectSize);
+        option1.addEventListener("change", selectSize);
+        option2.addEventListener("change", selectSize2);
 
     </script>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js">
